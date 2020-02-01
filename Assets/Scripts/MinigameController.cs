@@ -24,6 +24,7 @@ public class MinigameController : MonoBehaviour
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        gameScene = SceneManager.GetSceneByName("Minigame");
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -39,6 +40,7 @@ public class MinigameController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+        
     {
         if (Time.time - startTime >= GAME_SECONDS && active)
         {
