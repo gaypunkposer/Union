@@ -12,8 +12,9 @@ public class Touchable : MonoBehaviour
     public UnityEvent onHeld;
     public UnityEvent onTouchEnd;
 
-    private Rigidbody2D _body;
-    private void Start()
+    protected Rigidbody2D body;
+
+    protected void Start()
     {
         if (gameObject.layer != 8)
         {
@@ -21,29 +22,23 @@ public class Touchable : MonoBehaviour
             gameObject.layer = 8;
         }
 
-        _body = GetComponent<Rigidbody2D>();
-        //onTouchEnd.AddListener(ZeroOutVelocity);
+        body = GetComponent<Rigidbody2D>();
+        InitializeObject();
     }
 
-    void Update()
+    protected virtual void InitializeObject()
     {
-        
-    }
-
-    public void MoveToTouchDelta(Vector2 delta)
-    {
-        _body.AddForce(delta);
     }
 
     public void MoveToTouch(Vector2 pos)
     {
-        _body.MovePosition(pos);
+        body.MovePosition(pos);
     }
 
     private void ZeroOutVelocity()
     {
         Debug.Log("zeroing out velocity");
-        _body.velocity = Vector2.zero;
+        body.velocity = Vector2.zero;
     }
     
 }

@@ -7,13 +7,28 @@ using UnityEngine;
 
 public class TouchInput : MonoBehaviour
 {
+    public static TouchInput Instance => _instance;
+    public Vector2 TouchPosition => _touchPos;
+
+
     public bool shouldUseMouse = true;
-    public float dragSpeed = .5f;
     public float minDragDistance = 1f;
-    
+
     private static TouchInput _instance;
-    private Touchable _draggedObject;
-    public static bool IsTouching()
+    private Vector2 _touchPos;
+    private Touchable _touchedObject;
+
+    private void Start()
+    {
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+        }
+
+        _instance = this;
+    }
+
+    private static bool IsTouching()
     {
         return Input.touchCount > 0 || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0);
     }
@@ -35,54 +50,41 @@ public class TouchInput : MonoBehaviour
     private void Update()
     {
         if (!IsTouching()) return;
+#if UNITY_EDITOR
+        _touchPos = shouldUseMouse ? GetScreenToWorld(Input.mousePosition) : GetScreenToWorld(Input.GetTouch(0).position);
+#else
+        _touchPos = GetScreenToWorld(Input.GetTouch(0).position);
+#endif
         if (TouchStarted())
         {
-#if UNITY_EDITOR
-            Vector2 touchPos = shouldUseMouse ? GetScreenToWorld(Input.mousePosition) : GetScreenToWorld(Input.GetTouch(0).position);
-#else
-            Vector2 touchPos = GetScreenToWorld(Input.GetTouch(0).position);
-#endif
-            RaycastHit2D hit = Physics2D.CircleCast(touchPos, 1f, Vector2.zero, 1, 1 << 8, -10, 10);
+            RaycastHit2D hit = Physics2D.CircleCast(_touchPos, 1f, Vector2.zero, 1, 1 << 8, -10, 10);
             if (!hit)
             {
-                _draggedObject = null;
+                _touchedObject = null;
                 return;
             }
                 
-            _draggedObject = hit.rigidbody.gameObject.GetComponent<Touchable>();
-            _draggedObject.onTouchStart.Invoke();
-            Debug.Log("Touched object: " + _draggedObject);
+            _touchedObject = hit.rigidbody.gameObject.GetComponent<Touchable>();
+            _touchedObject.onTouchStart.Invoke();
+            Debug.Log("Touched object: " + _touchedObject);
         }
-        else if (TouchEnded() && _draggedObject != null)
+        else if (TouchEnded() && _touchedObject != null)
         {
-            _draggedObject.onTouchEnd.Invoke();
-            _draggedObject = null;
+            _touchedObject.onTouchEnd.Invoke();
+            _touchedObject = null;
             Debug.Log("touch ended");
         }
-        else if (_draggedObject)
+        else if (_touchedObject)
         {
-            Vector3 delta;
-#if UNITY_EDITOR
-            if (shouldUseMouse)
-            {
-                delta = GetScreenToWorld(Input.mousePosition) - _draggedObject.Position;
-            }
-            else
-            {
-                delta = GetScreenToWorld(Input.GetTouch(0).position) - _draggedObject.Position;
-            }
-#else
-                delta = GetScreenToWorld(Input.GetTouch(0).position) - _draggedObject.Position;
-#endif
-            _draggedObject.MoveToTouchDelta(delta * (dragSpeed * delta.magnitude * 0.75f));
-
+            Vector3 delta = _touchPos - _touchedObject.Position;;
+            
             if (delta.magnitude > minDragDistance)
             {
-                _draggedObject.onDragged.Invoke();
+                _touchedObject.onDragged.Invoke();
             }
             else
             {
-                _draggedObject.onHeld.Invoke();
+                _touchedObject.onHeld.Invoke();
             }
         }
     }
