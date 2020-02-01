@@ -19,12 +19,27 @@ public class MinigameController : MonoBehaviour
 
     public Camera horizontalCamera, verticalCamera;
     public Scene gameScene;
-    
+    public DetectOrientation orientation;
+
     // Start is called before the first frame update
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         gameScene = SceneManager.GetSceneByName("Minigame");
+        orientation.onRotateLandscape.AddListener(landscapeCamera);
+        orientation.onRotatePortrait.AddListener(portraitCamera);
+    }
+
+    void portraitCamera()
+    {
+        verticalCamera.enabled = true;
+        horizontalCamera.enabled = false;
+    }
+
+    void landscapeCamera()
+    {
+        verticalCamera.enabled = false;
+        horizontalCamera.enabled = true;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -40,7 +55,6 @@ public class MinigameController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-        
     {
         if (Time.time - startTime >= GAME_SECONDS && active)
         {
