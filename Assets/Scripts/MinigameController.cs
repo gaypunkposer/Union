@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+public enum TaskType
+{
+    PaperShred,
+    PaperFax
+}
+public class TaskTypeEvent : UnityEvent<TaskType> {
+}
 public class MinigameController : MonoBehaviour
 {
     public float startTime;
@@ -27,11 +34,6 @@ public class MinigameController : MonoBehaviour
     public Scene gameScene;
     public DetectOrientation orientation;
 
-    public enum TaskType
-    {
-        PaperShred,
-        PaperFax
-    }
     private TaskType nextTask;
 
     public UnityEvent<TaskType> spawnTimer;
@@ -39,6 +41,7 @@ public class MinigameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawnTimer = new TaskTypeEvent();
         SceneManager.sceneLoaded += OnSceneLoaded;
         gameScene = SceneManager.GetSceneByName("Minigame");
         orientation.onRotateLandscape.AddListener(landscapeCamera);
@@ -47,24 +50,30 @@ public class MinigameController : MonoBehaviour
             QUOTA_PER_LEVEL[i] = Mathf.FloorToInt(PAPERS_PER_SEC * GAME_SECONDS * ((MAX_ACCEL_PER_LEVEL[i] - 1) / 2 + 1)) - (int)MAX_ACCEL_PER_LEVEL[i];
         PAPER_FREQ = 1.0f / PAPERS_PER_SEC;
         nextTask = TaskType.PaperFax;
+        OnSceneLoaded(gameScene, LoadSceneMode.Single);
     }
 
     void portraitCamera()
     {
         verticalCamera.enabled = true;
+        verticalCamera.GetComponent<AudioListener>().enabled = true;
         horizontalCamera.enabled = false;
+        horizontalCamera.GetComponent<AudioListener>().enabled = false;
     }
 
     void landscapeCamera()
     {
         verticalCamera.enabled = false;
+        verticalCamera.GetComponent<AudioListener>().enabled = false;
         horizontalCamera.enabled = true;
+        horizontalCamera.GetComponent<AudioListener>().enabled = true;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene == gameScene) 
         {
+            portraitCamera();
             startTime = Time.time;
             gameAccelerator = startAccelerator;
             maxAccelerator = MAX_ACCEL_PER_LEVEL[level];
