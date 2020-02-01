@@ -8,6 +8,8 @@ public class Pool : MonoBehaviour
     private List<Paper> paperPool;
 
     private int inUse;
+
+    public MinigameController mc;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,18 +18,23 @@ public class Pool : MonoBehaviour
         for (int i = 0; i < 30; i++)
         {
             Paper p = gameObject.AddComponent<Paper>();
+            //Paper p = Instantiate(PaperPrefab, Vector3.zero, Quaternion.identity);
             p.gameObject.AddComponent<Rigidbody2D>();
             p.gameObject.AddComponent<Collider2D>();
             p.inUse = false;
             paperPool.Add(p);
         }
+        mc.spawnTimer.AddListener(PlacePaper);
     }
 
     void PlacePaper(TaskType type)
     {
+        if (type != TaskType.PaperFax && type != TaskType.PaperShred)
+            return;
         Paper p = null;
         if (inUse == paperPool.Count)
         {
+            //p = Instantiate(PaperPrefab, Vector3.zero, Quaternion.identity);
             p = gameObject.AddComponent<Paper>();
             p.gameObject.AddComponent<Rigidbody2D>();
             p.gameObject.AddComponent<Collider2D>();
