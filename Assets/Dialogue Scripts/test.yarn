@@ -1,0 +1,42 @@
+title: debugp|Passive
+tags: 
+colorID: 0
+position: -308,430
+---
+Yo, I'm a passive message. I'm the type of message you write when you don't want an entire tree with options, but still want a character to say something.
+===
+title: debugi|Interrupting
+tags: 
+colorID: 0
+position: 15,434
+---
+Yo, I'm an interrupting message. I'm the type of message you write when you want to pause the entire game and present the player with options.
+    [[Testing!|Debug.End ]] 
+    [[Cool|Debug.Cool]] 
+    [[Suck my dick, Phil|Debug.FuckYou]] 
+    [[Cool!|Debug.Cool]] 
+===
+title: Debug.Cool
+tags: 
+colorID: 0
+position: -253,737
+---
+<<set_anim_face debugi happy>> 
+I'm glad you think so!~
+===
+title: Debug.End
+tags: 
+colorID: 0
+position: 232,740
+---
+<<set_camera debugi 1>>
+You have reached the end.
+===
+title: Debug.FuckYou
+tags: 
+colorID: 0
+position: -5,743
+---
+<<set_anim_face debugi angry>> 
+Well fuck you then!
+===

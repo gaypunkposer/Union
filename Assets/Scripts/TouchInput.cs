@@ -9,8 +9,7 @@ public class TouchInput : MonoBehaviour
 {
     public static TouchInput Instance => _instance;
     public Vector2 TouchPosition => _touchPos;
-
-
+    
     public bool shouldUseMouse = true;
     public float minDragDistance = 1f;
 
@@ -65,12 +64,12 @@ public class TouchInput : MonoBehaviour
             }
                 
             _touchedObject = hit.rigidbody.gameObject.GetComponent<Touchable>();
-            _touchedObject.onTouchStart.Invoke();
+            _touchedObject.InvokeIfActive(_touchedObject.onTouchStart);
             Debug.Log("Touched object: " + _touchedObject);
         }
         else if (TouchEnded() && _touchedObject != null)
         {
-            _touchedObject.onTouchEnd.Invoke();
+            _touchedObject.InvokeIfActive(_touchedObject.onTouchEnd);
             _touchedObject = null;
             Debug.Log("touch ended");
         }
@@ -80,11 +79,11 @@ public class TouchInput : MonoBehaviour
             
             if (delta.magnitude > minDragDistance)
             {
-                _touchedObject.onDragged.Invoke();
+                _touchedObject.InvokeIfActive(_touchedObject.onDragged);
             }
             else
             {
-                _touchedObject.onHeld.Invoke();
+                _touchedObject.InvokeIfActive(_touchedObject.onHeld);
             }
         }
     }

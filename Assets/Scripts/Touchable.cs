@@ -29,4 +29,13 @@ public class Touchable : MonoBehaviour
     protected virtual void InitializeObject()
     {
     }
+    
+    public void InvokeIfActive(UnityEvent eventToInvoke)
+    {
+        if (this.isActiveAndEnabled)
+        {
+            eventToInvoke?.Invoke();
+        }
+    }
+    
 }
