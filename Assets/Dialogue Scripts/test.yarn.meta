@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 60e4117f57f44c242b4855b3a2f2d4d3
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en
+  stringIDs:
+  - test-debugp|Passive-0
+  - test-debugi|Interrupting-1
+  - test-debugi|Interrupting-2
+  - test-debugi|Interrupting-3
+  - test-debugi|Interrupting-4
+  - test-debugi|Interrupting-5
+  - test-debugi|Interrupting-6
+  - test-Debug.Cool-7
+  - test-Debug.End-8
+  - test-Debug.FuckYou-9
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 
+  baseLanguage: {fileID: 7128917941130120860, guid: 60e4117f57f44c242b4855b3a2f2d4d3,
+    type: 3}
+  localizations: []

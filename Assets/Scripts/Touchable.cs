@@ -29,16 +29,13 @@ public class Touchable : MonoBehaviour
     protected virtual void InitializeObject()
     {
     }
-
-    public void MoveToTouch(Vector2 pos)
+    
+    public void InvokeIfActive(UnityEvent eventToInvoke)
     {
-        body.MovePosition(pos);
-    }
-
-    private void ZeroOutVelocity()
-    {
-        Debug.Log("zeroing out velocity");
-        body.velocity = Vector2.zero;
+        if (this.isActiveAndEnabled)
+        {
+            eventToInvoke?.Invoke();
+        }
     }
     
 }
