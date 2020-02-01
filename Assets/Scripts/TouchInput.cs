@@ -6,7 +6,8 @@ public class TouchInput : MonoBehaviour
 {
     public static TouchInput Instance => _instance;
     public Transform PositionObject => _touchObject;
-
+    public bool shouldUseMouse;
+    
     private static TouchInput _instance;
     private Transform _touchObject;
 
@@ -34,7 +35,10 @@ public class TouchInput : MonoBehaviour
         if (IsTouching())
         {
 #if UNITY_EDITOR
-            _touchObject.position = GetTouchPosition();
+            if (shouldUseMouse)
+                _touchObject.position = GetMousePosition();
+            else
+                _touchObject.position = GetTouchPosition();
 #else
             _touchObject.position = GetTouchPosition();
 #endif
