@@ -41,6 +41,7 @@ public class MinigameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this);
         spawnTimer = new TaskTypeEvent();
         SceneManager.sceneLoaded += OnSceneLoaded;
         gameScene = SceneManager.GetSceneByName("Minigame");
