@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class MinigameController : MonoBehaviour
@@ -12,7 +13,12 @@ public class MinigameController : MonoBehaviour
     public float maxAccelerator;
     public float GAME_SECONDS = 30;
 
+    public float gameTimer = 0;
+
     public float[] MAX_ACCEL_PER_LEVEL = new float[3] {1, 4, 2 };
+    public int[] QUOTA_PER_LEVEL = new int[3];
+    public float PAPERS_PER_SEC = 1;
+    public float PAPER_FREQ;
 
     public int level = 0;
     public bool active = false;
@@ -21,6 +27,15 @@ public class MinigameController : MonoBehaviour
     public Scene gameScene;
     public DetectOrientation orientation;
 
+    public enum TaskType
+    {
+        PaperShred,
+        PaperFax
+    }
+    private TaskType nextTask;
+
+    public UnityEvent<TaskType> spawnTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +43,10 @@ public class MinigameController : MonoBehaviour
         gameScene = SceneManager.GetSceneByName("Minigame");
         orientation.onRotateLandscape.AddListener(landscapeCamera);
         orientation.onRotatePortrait.AddListener(portraitCamera);
+        for (int i = 0; i < MAX_ACCEL_PER_LEVEL.Length; i++)
+            QUOTA_PER_LEVEL[i] = Mathf.FloorToInt(PAPERS_PER_SEC * GAME_SECONDS * ((MAX_ACCEL_PER_LEVEL[i] - 1) / 2 + 1)) - (int)MAX_ACCEL_PER_LEVEL[i];
+        PAPER_FREQ = 1.0f / PAPERS_PER_SEC;
+        nextTask = TaskType.PaperFax;
     }
 
     void portraitCamera()
@@ -49,6 +68,8 @@ public class MinigameController : MonoBehaviour
             startTime = Time.time;
             gameAccelerator = startAccelerator;
             maxAccelerator = MAX_ACCEL_PER_LEVEL[level];
+            gameTimer = 0;
+            
             active = true;
         }
     }
@@ -67,6 +88,14 @@ public class MinigameController : MonoBehaviour
         {
             gameAccelerator = (Time.time - startTime) / GAME_SECONDS * (maxAccelerator - startAccelerator) +
                               startAccelerator;
+            gameTimer += Time.deltaTime * gameAccelerator;
+            if (gameTimer >= PAPER_FREQ)
+            {
+                spawnTimer.Invoke(nextTask);
+                gameTimer -= PAPER_FREQ;
+                //write a better spawn system here
+                nextTask = nextTask == TaskType.PaperFax ? TaskType.PaperShred : TaskType.PaperFax;
+            }
         }
     }
 }
