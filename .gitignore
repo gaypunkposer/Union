@@ -58,5 +58,4 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# avoid .idea stuff
-.idea
+.idea/
