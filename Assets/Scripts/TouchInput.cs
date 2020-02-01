@@ -1,72 +1,96 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Antlr4.Runtime;
+using TMPro;
 using UnityEngine;
 
 public class TouchInput : MonoBehaviour
 {
-    public static TouchInput Instance => _instance;
-    public Transform PositionObject => _touchObject;
-    public bool shouldUseMouse;
+    public bool shouldUseMouse = true;
+    public float dragSpeed = .5f;
+    public float minDragDistance = 1f;
     
     private static TouchInput _instance;
-    private Transform _touchObject;
-
-    private void Start()
+    private Touchable _draggedObject;
+    public static bool IsTouching()
     {
-        if (_instance != null)
-        {
-            DestroyImmediate(gameObject);
-        }
-
-        GameObject pos = Instantiate(new GameObject(), Vector3.zero, Quaternion.identity) as GameObject;
-        pos.name = "Touch Position";
-        _touchObject = pos.transform;
-
-        _instance = this;
+        return Input.touchCount > 0 || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0);
     }
 
-    public bool IsTouching()
+    private bool TouchStarted()
     {
-        return Input.touchCount > 0 || Input.GetMouseButton(0);
+        return (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || Input.GetMouseButtonDown(0);
     }
 
-    void Update()
+    private bool TouchEnded()
     {
-        if (IsTouching())
+#if UNITY_EDITOR
+        if (shouldUseMouse)
+            return Input.GetMouseButtonUp(0);
+#endif
+         return Input.touchCount == 0 || (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled));
+    }
+    
+    private void Update()
+    {
+        if (!IsTouching()) return;
+        if (TouchStarted())
         {
 #if UNITY_EDITOR
-            if (shouldUseMouse)
-                _touchObject.position = GetMousePosition();
-            else
-                _touchObject.position = GetTouchPosition();
+            Vector2 touchPos = shouldUseMouse ? GetScreenToWorld(Input.mousePosition) : GetScreenToWorld(Input.GetTouch(0).position);
 #else
-            _touchObject.position = GetTouchPosition();
+            Vector2 touchPos = GetScreenToWorld(Input.GetTouch(0).position);
 #endif
+            RaycastHit2D hit = Physics2D.CircleCast(touchPos, 1f, Vector2.zero, 1, 1 << 8, -10, 10);
+            if (!hit)
+            {
+                _draggedObject = null;
+                return;
+            }
+                
+            _draggedObject = hit.rigidbody.gameObject.GetComponent<Touchable>();
+            _draggedObject.onTouchStart.Invoke();
+            Debug.Log("Touched object: " + _draggedObject);
         }
-        else
+        else if (TouchEnded() && _draggedObject != null)
         {
-            _touchObject.position = Vector3.zero;
+            _draggedObject.onTouchEnd.Invoke();
+            _draggedObject = null;
+            Debug.Log("touch ended");
+        }
+        else if (_draggedObject)
+        {
+            Vector3 delta;
+#if UNITY_EDITOR
+            if (shouldUseMouse)
+            {
+                delta = GetScreenToWorld(Input.mousePosition) - _draggedObject.Position;
+            }
+            else
+            {
+                delta = GetScreenToWorld(Input.GetTouch(0).position) - _draggedObject.Position;
+            }
+#else
+                delta = GetScreenToWorld(Input.GetTouch(0).position) - _draggedObject.Position;
+#endif
+            _draggedObject.MoveToTouchDelta(delta * (dragSpeed * delta.magnitude * 0.75f));
+
+            if (delta.magnitude > minDragDistance)
+            {
+                _draggedObject.onDragged.Invoke();
+            }
+            else
+            {
+                _draggedObject.onHeld.Invoke();
+            }
         }
     }
-
-    private Vector3 GetTouchPosition()
+    
+    private static Vector2 GetScreenToWorld(Vector3 raw)
     {
-        if (Input.touchCount == 0) return Vector3.zero;
-        
-        Vector2 rawPos = Input.GetTouch(0).position;
-        Vector3 converted = Camera.main.ScreenToWorldPoint(rawPos);
+        Vector3 converted = Camera.main.ScreenToWorldPoint(raw);
         converted.z = 0;
-        return converted;
-    }
-
-    private Vector3 GetMousePosition()
-    {
-        if (!Input.GetMouseButton(0)) return Vector3.zero;
-        
-        Vector3 rawPos = Input.mousePosition;
-        rawPos.z = 0;
-        Vector3 converted = Camera.main.ScreenToWorldPoint(rawPos);
-        converted.z = 0;
-        return converted;
+        return new Vector2(converted.x, converted.y);
     }
 }
