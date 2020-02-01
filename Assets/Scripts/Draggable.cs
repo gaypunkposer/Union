@@ -14,7 +14,7 @@ public class Draggable : Touchable
 
     private void MoveOnDrag()
     {
-        Vector2 delta = TouchInput.Instance.TouchPosition - body.position;
+        Vector2 delta = TouchInput.Instance.TouchPosition - body.position; 
         body.AddForce(delta * (dragSpeed), ForceMode2D.Force);
     }
 }
