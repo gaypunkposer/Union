@@ -56,7 +56,6 @@ public class Paper : MonoBehaviour
     {
         return type;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         inUse = false;
