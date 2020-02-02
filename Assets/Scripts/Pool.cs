@@ -59,6 +59,12 @@ public class Pool : MonoBehaviour
         //do stuff like place the paper
     }
 
+    public void ReleasePaper(Paper paper)
+    {
+        paper.gameObject.SetActive(false);
+        paper.inUse = false;
+        inUse--;
+    }
  
 
     // Update is called once per frame
