@@ -120,11 +120,12 @@ public class MinigameController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider == faxCol) {
+            if (collision.gameObject.GetType() == PaperFax) {
 
-                Debug.Log(collision.gameObject.GetType());
-
+            }
         }
-        else if (collision.collider == faxCol) {
+
+            else if (collision.collider == faxCol) {
 
             Debug.Log(collision.gameObject.GetType());
         }
