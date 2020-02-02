@@ -19,6 +19,7 @@ public class MinigameController : MonoBehaviour
     public float startAccelerator = 1;
     public float maxAccelerator;
     public float GAME_SECONDS = 30;
+    public Pool pool;
 
     public float gameTimer = 0;
 
