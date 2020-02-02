@@ -6,8 +6,9 @@ public class FaxBehavior : MonoBehaviour
 {
     public Pool pool;
 	public MinigameController mg;
+    public AudioSource soundFX;
 
-	private Animator _animator;
+    private Animator _animator;
 
 	private static readonly int Fax = Animator.StringToHash("Fax");
 
@@ -39,5 +40,6 @@ public class FaxBehavior : MonoBehaviour
 		_animator.SetTrigger(Fax);
 		TouchInput.Instance.ForceTouchToEnd();
 	    pool.ReleasePaper(p);
-	}
+        soundFX.Play();
+    }
 }
