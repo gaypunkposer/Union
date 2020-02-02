@@ -8,6 +8,7 @@ public class Pool : MonoBehaviour
     private List<Paper> paperPool;
 
     private int inUse;
+    public GameObject paperPrefab;
 
     public MinigameController mc;
     // Start is called before the first frame update
@@ -17,10 +18,8 @@ public class Pool : MonoBehaviour
         inUse = 0;
         for (int i = 0; i < 30; i++)
         {
-            Paper p = gameObject.AddComponent<Paper>();
-            //Paper p = Instantiate(PaperPrefab, Vector3.zero, Quaternion.identity);
-            p.gameObject.AddComponent<Rigidbody2D>();
-            p.gameObject.AddComponent<Collider2D>();
+            GameObject go = Instantiate(paperPrefab, Vector3.zero, Quaternion.identity);
+            Paper p = go.GetComponent<Paper>();
             p.inUse = false;
             paperPool.Add(p);
         }
@@ -34,10 +33,8 @@ public class Pool : MonoBehaviour
         Paper p = null;
         if (inUse == paperPool.Count)
         {
-            //p = Instantiate(PaperPrefab, Vector3.zero, Quaternion.identity);
-            p = gameObject.AddComponent<Paper>();
-            p.gameObject.AddComponent<Rigidbody2D>();
-            p.gameObject.AddComponent<Collider2D>();
+            GameObject go = Instantiate(paperPrefab, Vector3.zero, Quaternion.identity);
+            p = go.GetComponent<Paper>();
             paperPool.Add(p);
         }
         else
@@ -48,6 +45,7 @@ public class Pool : MonoBehaviour
                     p = paperPool[i];
             }
         }
+        p.gameObject.transform.position = Vector3.zero;
         p.inUse = true;
         p.type = type;
         //do stuff like place the paper
