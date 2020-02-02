@@ -117,17 +117,9 @@ public class MinigameController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.collider == faxCol) {
-
-                Debug.Log(collision.gameObject.GetType());
-
-        }
-        else if (collision.collider == faxCol) {
-
-            Debug.Log(collision.gameObject.GetType());
-        }
+            Debug.Log(other.gameObject.GetType());
     }
 
 
