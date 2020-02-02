@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Paper : Touchable
+public class Paper : Draggable
 {
     private TaskType type;
     public bool inUse;
@@ -16,6 +16,7 @@ public class Paper : Touchable
     {
         onTouchStart.AddListener(OnTouch);
         onTouchEnd.AddListener(OnRelease);
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
     }
     // Update is called once per frame
     void Update()
