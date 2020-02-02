@@ -20,13 +20,12 @@ public class MinigameController : MonoBehaviour
     public float maxAccelerator;
     public float GAME_SECONDS = 30;
     public Pool pool;
-    public Queue<TaskType> paperQueue = new Queue<TaskType>();
 
     public GameObject fax;
     public GameObject shredder;
     private Collider2D faxCol;
     private Collider2D shredCol;
-    private int completed;
+    public int completed=0;
     public float gameTimer = 0;
 
     public float[] MAX_ACCEL_PER_LEVEL = new float[3] { 1, 4, 2 };
@@ -54,7 +53,7 @@ public class MinigameController : MonoBehaviour
         spawnTimer = new TaskTypeEvent();
         SceneManager.sceneLoaded += OnSceneLoaded;
         gameScene = SceneManager.GetSceneByName("Minigame");
-        //orientation.onRotateLandscape.AddListener(landscapeCamera);
+        orientation.onRotateLandscape.AddListener(landscapeCamera);
         orientation.onRotatePortrait.AddListener(portraitCamera);
         for (int i = 0; i < MAX_ACCEL_PER_LEVEL.Length; i++)
             QUOTA_PER_LEVEL[i] = Mathf.FloorToInt(PAPERS_PER_SEC * GAME_SECONDS * ((MAX_ACCEL_PER_LEVEL[i] - 1) / 2 + 1)) - (int)MAX_ACCEL_PER_LEVEL[i];
@@ -110,32 +109,14 @@ public class MinigameController : MonoBehaviour
             gameTimer += Time.deltaTime * gameAccelerator;
             if (gameTimer >= PAPER_FREQ)
             {
-                //spawnTimer.Invoke(nextTask);
-                paperQueue.Enqueue(nextTask);
+                spawnTimer.Invoke(nextTask);
                 gameTimer -= PAPER_FREQ;
                 //write a better spawn system here
                 nextTask = nextTask == TaskType.PaperFax ? TaskType.PaperShred : TaskType.PaperFax;
             }
-
-            if (paperQueue.Count > 0 && pool.onScreen() == 0)
-            {
-                spawnTimer.Invoke(paperQueue.Dequeue());
-            }
-                
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        //check the TaskType Paper
-        if (other.GetComponent <TaskType>() == TaskType.PaperFax) {
-            completed++;
-        }
-        else if(other.GetComponent <TaskType>() == TaskType.PaperShred) {
-            completed++;
-        }
-            Debug.Log(completed);
-    }
 
 
 }
