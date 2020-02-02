@@ -71,7 +71,6 @@ public class TouchInput : MonoBehaviour
         {
             _touchedObject.InvokeIfActive(_touchedObject.onTouchEnd);
             _touchedObject = null;
-            Debug.Log("touch ended");
         }
         else if (_touchedObject)
         {
@@ -93,5 +92,12 @@ public class TouchInput : MonoBehaviour
         Vector3 converted = Camera.main.ScreenToWorldPoint(raw);
         converted.z = 0;
         return new Vector2(converted.x, converted.y);
+    }
+
+    public void ForceTouchToEnd()
+    {
+        if (!_touchedObject) return;
+        _touchedObject.InvokeIfActive(_touchedObject.onTouchEnd);
+        _touchedObject = null;
     }
 }

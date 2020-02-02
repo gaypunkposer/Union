@@ -18,6 +18,7 @@ public class ShredBehavior : MonoBehaviour
     {
         
     }
+<<<<<<< HEAD
     private void OnTriggerEnter2D(Collider2D other)
     {
         //check the TaskType Paper
@@ -33,5 +34,22 @@ public class ShredBehavior : MonoBehaviour
         }
             pool.ReleasePaper(p);
             soundFX.Play();
+=======
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //check the TaskType Paper
+        Paper p = other.GetComponent<Paper>();
+
+        if (p == null) { 
+            Debug.Log("Error this is not a paper");
+            return;
+        }
+        else if (p.getType() == TaskType.PaperShred)
+        {
+            mg.completed++;
+        }
+        TouchInput.Instance.ForceTouchToEnd();
+        pool.ReleasePaper(p);
+>>>>>>> origin/master
     }
 }

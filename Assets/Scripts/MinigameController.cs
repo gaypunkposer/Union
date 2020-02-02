@@ -21,7 +21,8 @@ public class MinigameController : MonoBehaviour
     public float maxAccelerator;
     public float GAME_SECONDS = 30;
     public Pool pool;
-
+    public Queue<TaskType> paperQueue = new Queue<TaskType>();
+    
     public GameObject fax;
     public GameObject shredder;
     private Collider2D faxCol;
@@ -111,10 +112,15 @@ public class MinigameController : MonoBehaviour
             gameTimer += Time.deltaTime * gameAccelerator;
             if (gameTimer >= PAPER_FREQ)
             {
-                spawnTimer.Invoke(nextTask);
+                //spawnTimer.Invoke(nextTask);
+                paperQueue.Enqueue(nextTask);
                 gameTimer -= PAPER_FREQ;
                 //write a better spawn system here
                 nextTask = UnityEngine.Random.value > .5f ? TaskType.PaperShred : TaskType.PaperFax;
+            }
+            if (paperQueue.Count > 0 && pool.onScreen() == 0)
+            {
+                spawnTimer.Invoke(paperQueue.Dequeue());
             }
         }
     }
@@ -127,10 +133,11 @@ public class MinigameController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //check the TaskType Paper
-        if (other.GetComponent <TaskType>() == TaskType.PaperFax) {
+        Paper paper = other.GetComponent<Paper>();
+        if (paper.getType() == TaskType.PaperFax) {
             completed++;
         }
-        else if(other.GetComponent <TaskType>() == TaskType.PaperShred) {
+        else if(paper.getType() == TaskType.PaperShred) {
             completed++;
         }
             Debug.Log(completed);
