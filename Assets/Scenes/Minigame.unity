@@ -474,7 +474,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455789820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.52, z: 0}
+  m_LocalPosition: {x: -0.01, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -601,6 +601,7 @@ GameObject:
   - component: {fileID: 1928387693}
   - component: {fileID: 1928387695}
   - component: {fileID: 1928387696}
+  - component: {fileID: 1928387697}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -690,6 +691,20 @@ MonoBehaviour:
   paperPrefab: {fileID: 5791422883781823858, guid: 76c1a428523e3f04f85a59a604e626e1,
     type: 3}
   mc: {fileID: 1928387693}
+--- !u!114 &1928387697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928387692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b256d82eceff6f499257469e9e459a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldUseMouse: 1
+  minDragDistance: 1
 --- !u!1 &1931811155
 GameObject:
   m_ObjectHideFlags: 0

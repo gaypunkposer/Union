@@ -119,9 +119,15 @@ public class MinigameController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-            Debug.Log(other.gameObject.GetType());
+        //check the TaskType Paper
+        if (other.GetComponent <TaskType>() == TaskType.PaperFax) {
+            completed++;
+        }
+        else if(other.GetComponent <TaskType>() == TaskType.PaperShred) {
+            completed++;
+        }
+            Debug.Log(completed);
     }
-
 
 
 }
