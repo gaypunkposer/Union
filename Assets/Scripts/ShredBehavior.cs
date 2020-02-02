@@ -6,6 +6,7 @@ public class ShredBehavior : MonoBehaviour
 {
     public Pool pool;
     public MinigameController mg;
+    public AudioSource soundFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,5 +32,6 @@ public class ShredBehavior : MonoBehaviour
             mg.completed++;
         }
             pool.ReleasePaper(p);
+            soundFX.Play();
     }
 }
