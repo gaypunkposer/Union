@@ -37,13 +37,6 @@ public class Paper : Touchable
     {
         return touched;
     }
-<<<<<<< HEAD
-    public void setType(TaskType type) {
-        this.type = type;
-    }
-
-=======
-
     void setType(TaskType type)
     {
         this.type = type;
@@ -62,5 +55,4 @@ public class Paper : Touchable
     {
         inUse = false;
     }
->>>>>>> origin/master
 }
