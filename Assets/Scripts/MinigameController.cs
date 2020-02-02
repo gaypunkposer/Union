@@ -103,6 +103,7 @@ public class MinigameController : MonoBehaviour
             active = false;
             //end game
             //switch scene
+            SwitchScene();
         }
         else if (active)
         {
@@ -124,6 +125,11 @@ public class MinigameController : MonoBehaviour
             }
                 
         }
+    }
+
+    private void SwitchScene()
+    {
+        SceneManager.LoadScene("Dialogue");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
