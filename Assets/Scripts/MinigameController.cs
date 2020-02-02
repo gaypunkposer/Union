@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 public enum TaskType
 {
@@ -58,7 +59,7 @@ public class MinigameController : MonoBehaviour
         for (int i = 0; i < MAX_ACCEL_PER_LEVEL.Length; i++)
             QUOTA_PER_LEVEL[i] = Mathf.FloorToInt(PAPERS_PER_SEC * GAME_SECONDS * ((MAX_ACCEL_PER_LEVEL[i] - 1) / 2 + 1)) - (int)MAX_ACCEL_PER_LEVEL[i];
         PAPER_FREQ = 1.0f / PAPERS_PER_SEC;
-        nextTask = TaskType.PaperFax;
+        nextTask = UnityEngine.Random.value > .5f ? TaskType.PaperShred : TaskType.PaperFax;
         OnSceneLoaded(gameScene, LoadSceneMode.Single);
     }
 
@@ -101,6 +102,7 @@ public class MinigameController : MonoBehaviour
             active = false;
             //end game
             //switch scene
+            SwitchScene();
         }
         else if (active)
         {
@@ -112,11 +114,27 @@ public class MinigameController : MonoBehaviour
                 spawnTimer.Invoke(nextTask);
                 gameTimer -= PAPER_FREQ;
                 //write a better spawn system here
-                nextTask = nextTask == TaskType.PaperFax ? TaskType.PaperShred : TaskType.PaperFax;
+                nextTask = UnityEngine.Random.value > .5f ? TaskType.PaperShred : TaskType.PaperFax;
             }
         }
     }
 
+    private void SwitchScene()
+    {
+        SceneManager.LoadScene("Dialogue");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //check the TaskType Paper
+        if (other.GetComponent <TaskType>() == TaskType.PaperFax) {
+            completed++;
+        }
+        else if(other.GetComponent <TaskType>() == TaskType.PaperShred) {
+            completed++;
+        }
+            Debug.Log(completed);
+    }
 
 
 }
