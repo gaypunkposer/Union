@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class Paper : Touchable
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -18,4 +19,5 @@ public class Paper : Touchable
     public void setType(TaskType type) {
         this.type = type;
     }
+
 }
