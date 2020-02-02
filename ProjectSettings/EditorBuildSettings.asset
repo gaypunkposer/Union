@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Portrait Game.unity
     guid: 2f1706631716e38408ca0fcf44e36e1f
   - enabled: 1
-    path: Assets/Scenes/Test Dialogue.unity
+    path: Assets/Scenes/Dialogue.unity
     guid: 7e4c08fa12e249f4db5673d72dadc4a3
   m_configObjects: {}
