@@ -49,7 +49,7 @@ public class Pool : MonoBehaviour
         p.gameObject.transform.position = Vector3.zero;
         p.gameObject.SetActive(true);
         p.inUse = true;
-        p.type = type;
+        p.setType(type);
         //do stuff like place the paper
     }
 
