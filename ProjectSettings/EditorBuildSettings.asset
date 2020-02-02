@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Quick Start.unity
     guid: 08005a5cd1e678921a931fd9d24919d6
+  - enabled: 1
+    path: Assets/Scenes/Minigame.unity
+    guid: 93f00a197e3d1e581b790589b7ea7999
   m_configObjects: {}
