@@ -3,11 +3,11 @@ tags:
 colorID: 0
 position: -552,-146
 ---
-I hope this is water– well... I [i]hope[/i] this doesn't kill me when I drink it
+I hope this is water– well... I hope this doesn't kill me when I drink it
 -> What is this place?
     They says its an Employee Break room, BUT we all know this is just a basement. 
 -> What is THAT Orange liquid!?!
-    hmmm... I'm gonna call it, "I'm too cheap to pay $10 for bottled water, cause I need to take the bus home"
+    Hmmm... I'm gonna call it, "I'm too cheap to pay $10 for bottled water, cause I need to take the bus home."
 [[Who are you?|conv1]]
 [[Should I be concerned...|conv2]]
 [[That doesn't surprise me!|conv3]]
@@ -17,17 +17,17 @@ tags:
 colorID: 0
 position: 73,106
 ---
-Everyone calls me Buffy around these parts, You must be the poor five-to-ninety nine everyones been talking about! <<set $knowsName to true>>
+Everyone calls me Buffy around these parts, You must be the poor five-to-ninety nine everyones been talking about!
 
-[[ five-to-ninety nine?: |fivetoninty ]] 
-[[That's five-to-Nine hundred, thank you very much!: |notpath ]]
+[[Five-to-ninety nine?|fivetoninty]] 
+[[That's five-to-Nine hundred, thank you very much!|notpath]]
 ===
 title: conv2
 tags: 
 colorID: 0
 position: -556,154
 ---
-As concerned as that floating rat in the water tank– Oh shoot!
+As concerned as that floating rat in the water tank – Oh shoot!
 [[conv2-cont]]
 ===
 title: conv2-cont
@@ -35,7 +35,7 @@ tags:
 colorID: 0
 position: -564,467
 ---
- This stuff might actually be bad for my health than...
+This stuff might actually be bad for my health than...
 [[conv2-cont2]]
 ===
 title: conv2-cont2
@@ -45,8 +45,8 @@ position: -590,786
 ---
 Oh well–– but seriously the only person you should look out for is that boss of yours!
 
-[[I still don't [i]get[/i] him: | conv2-ch1]] 
-[[you mean that [i]that[/i] jerk?: | conv2-ch2]] 
+[[I still don't get him|conv2-ch1]] 
+[[You mean that that jerk?|conv2-ch2]] 
 ===
 title: conv3
 tags: 
@@ -54,18 +54,17 @@ colorID: 0
 position: 67,-323
 ---
 Be careful... complicity when unchecked is silent, but deadly!
-[[ I think I can handle it: |conv3-ch1 ]] 
-[[ How the hell do keep on doing this: | ]] 
+[[I think I can handle it.|conv3-ch1]] 
 ===
 title: fivetoninty
 tags: 
 colorID: 0
 position: 494,100
 ---
-Normal, [i]"da Boss"[/i], can smell fresh meat a mile away, better watch it. The dude is really into push the limits of his work. Thats why this place is so "successful" I guess... 
+Normal, "da Boss", can smell fresh meat a mile away, better watch it. The dude is really into push the limits of his work. Thats why this place is so "successful" I guess... 
 
--> that's... illegal?
-    who knows, but are you thinking of doing something about it?
+-> That's... illegal?
+    Who knows, but are you thinking of doing something about it?
 -> I thought they're we're all exaggerations
     In this place, they expect you to come in so low that any thing is possible. 
 
@@ -76,7 +75,7 @@ tags:
 colorID: 0
 position: 519,429
 ---
-there's a point to showing off battle scars reveals our strengths, but in this case, its just sad. We shouldn't be doing these ridiculous work hours in the ridiculous conditions. 
+There's a point to showing off battle scars reveals our strengths, but in this case, its just sad. We shouldn't be doing these ridiculous work hours in the ridiculous conditions. 
 
 [[notpathcont]]
 ===
@@ -86,7 +85,7 @@ colorID: 0
 position: -184,987
 ---
 You don't need to get someone to know that their an ass! It's no mystery about it, I mean... just look at this place!
-[[conv2-ch1-cont ]] 
+[[conv2-ch1-cont]] 
 ===
 title: conv2-ch1-cont
 tags: 
@@ -95,8 +94,8 @@ position: 1225,920
 ---
 I suppose you're getting the hang of it, but remember we all have our limits
 
-[[ I-I got this!: | conv2-ch1-cont-ch1]] 
-[[ RIP my life: | conv2-ch1-cont-ch2]] 
+[[I-I got this!|conv2-ch1-cont-ch1]] 
+[[RIP my life|conv2-ch1-cont-ch2]] 
 ===
 title: conv3-ch1
 tags: 
@@ -108,7 +107,7 @@ I don't... no one does. We're all dead inside.
 -> ...
     
 -> F#$% this shit
-    yeah... fuck capitalism
+    Yeah... fuck capitalism.
 -> Bold of you to assume I'm not dead already!
     ah, I see your not as much of a Rookie as I thought you where...
 ===
@@ -127,13 +126,13 @@ position: 88,682
 Oh we all know, the day a revolution comes, I will enjoy seeing his head's sweat embrace on a guillotine.
 
 -> Oh sweet sweet revenge
-    thats the spirit! Anyway gotta go! See ya later!
+    Thats the spirit! Anyway gotta go! See ya later!
 -> Why not just bust his kneecaps?
-    some of [i]us[/i] can't afford to go to jail or dealing with the police is more deadly than any shift
--> why not just leave this job?
-    because some of us don't have a choice. we all got bills to pay and some of us have been unemployed before
+    Some of us can't afford to go to jail or dealing with the police is more deadly than any shift.
+-> Why not just leave this job?
+    Because some of us don't have a choice. We all got bills to pay and some of us have been homeless before.
 
-Either way, we can't keep going like this
+Either way, we can't keep going like this.
 ===
 title: conv2-ch1-cont-ch1
 tags: 
@@ -147,12 +146,12 @@ tags:
 colorID: 0
 position: 2030,611
 ---
-Life is difficult, or so they say.[i]but[/i] I can't help and wonder  that most of these difficulties are arbitrary. that they can absolutely be avoided if our boss respected us more!
+Life is difficult, or so they say, but I can't help and wonder that most of these difficulties are arbitrary, that they can absolutely be avoided if our boss respected us more!
 
--> what idea do you have in mind?
-    an idea that might get me fired...
--> go on...
-    let's just say me and a couple of flock-mates have had some teaming up and doing a bit of investigation
+-> What idea do you have in mind?
+    An idea that might get me fired...
+-> Go on...
+    Let's just say me and a couple of flock-mates have had some teaming up and doing a bit of investigation.
 
 This place isn't the best to discuss, I'll fill ya in the deets later. see ya!
 ===

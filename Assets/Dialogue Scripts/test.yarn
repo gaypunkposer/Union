@@ -5,13 +5,14 @@ position: -308,430
 ---
 Yo, I'm a passive message. I'm the type of message you write when you don't want an entire tree with options, but still want a character to say something.
 ===
-title: debugi|Interrupting
+title: Start
 tags: 
 colorID: 0
 position: 15,434
 ---
 Yo, I'm an interrupting message. I'm the type of message you write when you want to pause the entire game and present the player with options.
-    [[Testing!|Debug.End ]] 
+    -> Testing
+        Rad
     [[Cool|Debug.Cool]] 
     [[Suck my dick, Phil|Debug.FuckYou]] 
     [[Cool!|Debug.Cool]] 

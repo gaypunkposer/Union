@@ -8,12 +8,12 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
-  baseLanguageID: 
+  baseLanguageID: en-US
   stringIDs: []
   compilationStatus: 0
   isSuccesfullyCompiled: 0
   compilationErrorMessage: "Error on line 48 at position 21:\nno viable alternative
-    at input '[[I still don't [iet[/i'\n[[I still don't [i]get[/i] him: | conv2-ch1]]
-    \n                    ^^^^^"
+    at input '[[I still don't [iet[/i'\r\n[[I still don't [i]get[/i] him: | conv2-ch1]]
+    \r\n                    ^^^^^"
   baseLanguage: {instanceID: 0}
   localizations: []
