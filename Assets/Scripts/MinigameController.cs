@@ -21,6 +21,8 @@ public class MinigameController : MonoBehaviour
     public float GAME_SECONDS = 30;
     public Pool pool;
 
+    public GameObject fax;
+    public GameObject shredder;
     public float gameTimer = 0;
 
     public float[] MAX_ACCEL_PER_LEVEL = new float[3] {1, 4, 2 };
@@ -111,4 +113,9 @@ public class MinigameController : MonoBehaviour
             }
         }
     }
+
+    void metQuota() {
+
+    }
+
 }
