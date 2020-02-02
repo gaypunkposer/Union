@@ -51,7 +51,6 @@ public class Paper : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = shredSprite;
         }
     }
-
     public TaskType getType()
     {
         return type;
