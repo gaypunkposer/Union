@@ -30,6 +30,7 @@ public class FaxBehavior : MonoBehaviour
 		{
 			mg.completed++;
 		}
-			pool.ReleasePaper(p);
+		TouchInput.Instance.ForceTouchToEnd();
+	    pool.ReleasePaper(p);
 	}
 }

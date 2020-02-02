@@ -30,6 +30,7 @@ public class ShredBehavior : MonoBehaviour
         {
             mg.completed++;
         }
-            pool.ReleasePaper(p);
+        TouchInput.Instance.ForceTouchToEnd();
+        pool.ReleasePaper(p);
     }
 }
