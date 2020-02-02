@@ -19,10 +19,16 @@ public class MinigameController : MonoBehaviour
     public float startAccelerator = 1;
     public float maxAccelerator;
     public float GAME_SECONDS = 30;
+    public Pool pool;
 
+    public GameObject fax;
+    public GameObject shredder;
+    private Collider2D faxCol;
+    private Collider2D shredCol;
+    private int completed;
     public float gameTimer = 0;
 
-    public float[] MAX_ACCEL_PER_LEVEL = new float[3] {1, 4, 2 };
+    public float[] MAX_ACCEL_PER_LEVEL = new float[3] { 1, 4, 2 };
     public int[] QUOTA_PER_LEVEL = new int[3];
     public float PAPERS_PER_SEC = 1;
     public float PAPER_FREQ;
@@ -41,6 +47,8 @@ public class MinigameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        faxCol = fax.GetComponent<Collider2D>();
+        shredCol = shredder.GetComponent<Collider2D>();
         DontDestroyOnLoad(this);
         spawnTimer = new TaskTypeEvent();
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -72,14 +80,14 @@ public class MinigameController : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene == gameScene) 
+        if (scene == gameScene)
         {
             portraitCamera();
             startTime = Time.time;
             gameAccelerator = startAccelerator;
             maxAccelerator = MAX_ACCEL_PER_LEVEL[level];
             gameTimer = 0;
-            
+
             active = true;
         }
     }
@@ -108,4 +116,20 @@ public class MinigameController : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider == faxCol) {
+
+                Debug.Log(collision.gameObject.GetType());
+
+        }
+        else if (collision.collider == faxCol) {
+
+            Debug.Log(collision.gameObject.GetType());
+        }
+    }
+
+
+
 }
