@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Paper : Touchable
 {
-    public TaskType type;
+    private TaskType type;
     public bool inUse;
     private bool touched = false;
 
@@ -37,7 +37,7 @@ public class Paper : Touchable
     {
         return touched;
     }
-    void setType(TaskType type)
+    public void setType(TaskType type)
     {
         this.type = type;
         if (type == TaskType.PaperFax)
@@ -49,6 +49,11 @@ public class Paper : Touchable
         {
             GetComponent<SpriteRenderer>().sprite = shredSprite;
         }
+    }
+
+    public TaskType getType()
+    {
+        return type;
     }
 
     private void OnCollisionEnter(Collision collision)
