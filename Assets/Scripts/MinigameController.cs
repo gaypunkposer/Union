@@ -58,7 +58,7 @@ public class MinigameController : MonoBehaviour
         orientation.onRotateLandscape.AddListener(landscapeCamera);
         orientation.onRotatePortrait.AddListener(portraitCamera);
         for (int i = 0; i < MAX_ACCEL_PER_LEVEL.Length; i++)
-            QUOTA_PER_LEVEL[i] = Mathf.FloorToInt(PAPERS_PER_SEC * GAME_SECONDS * ((MAX_ACCEL_PER_LEVEL[i] - 1) / 2 + 1)) - (int)MAX_ACCEL_PER_LEVEL[i];
+            QUOTA_PER_LEVEL[i] = Mathf.FloorToInt(PAPERS_PER_SEC * GAME_SECONDS * ((MAX_ACCEL_PER_LEVEL[i] - 1) / 2 + 1)) - (2 * (int)MAX_ACCEL_PER_LEVEL[i]);
         PAPER_FREQ = 1.0f / PAPERS_PER_SEC;
         nextTask = UnityEngine.Random.value > .5f ? TaskType.PaperShred : TaskType.PaperFax;
         OnSceneLoaded(gameScene, LoadSceneMode.Single);
@@ -97,7 +97,7 @@ public class MinigameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - startTime >= GAME_SECONDS && active)
+        if ((Time.time - startTime >= GAME_SECONDS || completed == QUOTA_PER_LEVEL[level]) && active)
         {
             level++;
             active = false;

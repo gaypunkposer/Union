@@ -921,7 +921,7 @@ MonoBehaviour:
   - 4
   - 2
   QUOTA_PER_LEVEL: 000000000000000000000000
-  PAPERS_PER_SEC: 1
+  PAPERS_PER_SEC: 0.5
   PAPER_FREQ: 0
   level: 0
   active: 0
