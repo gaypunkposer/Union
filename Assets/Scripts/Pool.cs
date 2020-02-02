@@ -19,6 +19,7 @@ public class Pool : MonoBehaviour
         for (int i = 0; i < 30; i++)
         {
             GameObject go = Instantiate(paperPrefab, Vector3.zero, Quaternion.identity);
+            go.SetActive(false);
             Paper p = go.GetComponent<Paper>();
             p.inUse = false;
             paperPool.Add(p);
@@ -46,6 +47,7 @@ public class Pool : MonoBehaviour
             }
         }
         p.gameObject.transform.position = Vector3.zero;
+        p.gameObject.SetActive(true);
         p.inUse = true;
         p.type = type;
         //do stuff like place the paper
