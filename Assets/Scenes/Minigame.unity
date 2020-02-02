@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d69cd4a33e03ddf4a7016247a918a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paperPrefab: {fileID: 5924272715762645389, guid: 60de45ed6277e3cea99349c6c63bf9e8,
+  paperPrefab: {fileID: 5791422883781823858, guid: 76c1a428523e3f04f85a59a604e626e1,
     type: 3}
   mc: {fileID: 1928387693}
 --- !u!1 &1931811155
