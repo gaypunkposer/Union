@@ -27,6 +27,11 @@ public class Pool : MonoBehaviour
         mc.spawnTimer.AddListener(PlacePaper);
     }
 
+    public int onScreen()
+    {
+        return inUse;
+    }
+
     void PlacePaper(TaskType type)
     {
         if (type != TaskType.PaperFax && type != TaskType.PaperShred)
@@ -50,6 +55,7 @@ public class Pool : MonoBehaviour
         p.gameObject.SetActive(true);
         p.inUse = true;
         p.setType(type);
+        inUse++;
         //do stuff like place the paper
     }
 

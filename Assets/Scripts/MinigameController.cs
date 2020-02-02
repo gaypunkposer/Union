@@ -20,6 +20,7 @@ public class MinigameController : MonoBehaviour
     public float maxAccelerator;
     public float GAME_SECONDS = 30;
     public Pool pool;
+    public Queue<TaskType> paperQueue = new Queue<TaskType>();
 
     public GameObject fax;
     public GameObject shredder;
@@ -53,7 +54,7 @@ public class MinigameController : MonoBehaviour
         spawnTimer = new TaskTypeEvent();
         SceneManager.sceneLoaded += OnSceneLoaded;
         gameScene = SceneManager.GetSceneByName("Minigame");
-        orientation.onRotateLandscape.AddListener(landscapeCamera);
+        //orientation.onRotateLandscape.AddListener(landscapeCamera);
         orientation.onRotatePortrait.AddListener(portraitCamera);
         for (int i = 0; i < MAX_ACCEL_PER_LEVEL.Length; i++)
             QUOTA_PER_LEVEL[i] = Mathf.FloorToInt(PAPERS_PER_SEC * GAME_SECONDS * ((MAX_ACCEL_PER_LEVEL[i] - 1) / 2 + 1)) - (int)MAX_ACCEL_PER_LEVEL[i];
@@ -109,11 +110,18 @@ public class MinigameController : MonoBehaviour
             gameTimer += Time.deltaTime * gameAccelerator;
             if (gameTimer >= PAPER_FREQ)
             {
-                spawnTimer.Invoke(nextTask);
+                //spawnTimer.Invoke(nextTask);
+                paperQueue.Enqueue(nextTask);
                 gameTimer -= PAPER_FREQ;
                 //write a better spawn system here
                 nextTask = nextTask == TaskType.PaperFax ? TaskType.PaperShred : TaskType.PaperFax;
             }
+
+            if (paperQueue.Count > 0 && pool.onScreen() == 0)
+            {
+                spawnTimer.Invoke(paperQueue.Dequeue());
+            }
+                
         }
     }
 
