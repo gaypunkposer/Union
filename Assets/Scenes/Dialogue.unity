@@ -12375,6 +12375,7 @@ GameObject:
   - component: {fileID: 2086866299}
   - component: {fileID: 2086866302}
   - component: {fileID: 2086866303}
+  - component: {fileID: 2086866304}
   m_Layer: 0
   m_Name: Dialogue Manager
   m_TagString: Untagged
@@ -12413,7 +12414,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   onDialogueEnd:
     m_PersistentCalls:
@@ -12484,6 +12485,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2086866304}
+        m_MethodName: LoadNextScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Minigame
+          m_BoolArgument: 0
+        m_CallState: 2
   onLineStart:
     m_PersistentCalls:
       m_Calls: []
@@ -12529,7 +12541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnScripts:
-  - {fileID: 2480198943629176163, guid: 60e4117f57f44c242b4855b3a2f2d4d3, type: 3}
+  - {fileID: 2480198943629176163, guid: a3745fed186c84beda05dd2aeb32b000, type: 3}
   textLanguage: 
   variableStorage: {fileID: 2086866302}
   dialogueUI: {fileID: 2086866299}
@@ -12580,6 +12592,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 2086866299}
+--- !u!114 &2086866304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086866298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6340c2f4e49cb54fbd98f46a2393000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2095471836
 GameObject:
   m_ObjectHideFlags: 0
@@ -12853,7 +12877,7 @@ PrefabInstance:
     - target: {fileID: 5017441887253835408, guid: e609754b1bbdd38428659b8fbabb7b9c,
         type: 3}
       propertyPath: onTouchStart.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: debugi|Interrupting
+      value: Start
       objectReference: {fileID: 0}
     - target: {fileID: 5017441887253835408, guid: e609754b1bbdd38428659b8fbabb7b9c,
         type: 3}
