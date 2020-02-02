@@ -112,7 +112,7 @@ public class MinigameController : MonoBehaviour
             gameTimer += Time.deltaTime * gameAccelerator;
             if (gameTimer >= PAPER_FREQ)
             {
-                spawnTimer.Invoke(nextTask);
+                //spawnTimer.Invoke(nextTask);
                 paperQueue.Enqueue(nextTask);
                 gameTimer -= PAPER_FREQ;
                 //write a better spawn system here
@@ -133,10 +133,11 @@ public class MinigameController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //check the TaskType Paper
-        if (other.GetComponent <TaskType>() == TaskType.PaperFax) {
+        Paper paper = other.GetComponent<Paper>();
+        if (paper.getType() == TaskType.PaperFax) {
             completed++;
         }
-        else if(other.GetComponent <TaskType>() == TaskType.PaperShred) {
+        else if(paper.getType() == TaskType.PaperShred) {
             completed++;
         }
             Debug.Log(completed);
