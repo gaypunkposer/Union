@@ -34,6 +34,8 @@ public class MinigameController : MonoBehaviour
     public Scene gameScene;
     public DetectOrientation orientation;
 
+    public Pool pool;
+
     private TaskType nextTask;
 
     public UnityEvent<TaskType> spawnTimer;
