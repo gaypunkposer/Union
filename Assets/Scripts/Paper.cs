@@ -56,7 +56,6 @@ public class Paper : Draggable
     {
         return type;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         inUse = false;
