@@ -7,10 +7,15 @@ public class ShredBehavior : MonoBehaviour
     public Pool pool;
     public MinigameController mg;
     public AudioSource soundFX;
+    
+    private Animator _animator;
+
+    private static readonly int Shred = Animator.StringToHash("Shred");
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,6 +36,8 @@ public class ShredBehavior : MonoBehaviour
         {
             mg.completed++;
         }
+
+        _animator.SetTrigger(Shred);
         TouchInput.Instance.ForceTouchToEnd();
         pool.ReleasePaper(p);
         soundFX.Play();
